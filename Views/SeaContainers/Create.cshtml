@@ -1,0 +1,114 @@
+﻿@model WebAuslink.Models.SeaContainer
+
+@*@using WebAuslink.Models
+@model IEnumerable<WebAuslink.Data.WebAuslinkContext>  ClientModel;*@
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <h1>Create</h1>
+
+    <h4>SeaContainer</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="ClientCompanyName" class="control-label"></label>
+                    <select asp-for="ClientCompanyName" class="form-control" asp-items="new SelectList(ViewBag.ClientList)" required>
+                        <option value="">Please select shipper name</option>
+                    </select>
+                    <span asp-validation-for="ClientCompanyName" class="text-danger">  </span>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ContainerNumber" class="control-label"></label>
+                    <input asp-for="ContainerNumber" class="form-control" required />
+                    <span asp-validation-for="ContainerNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OceanFreightETA" class="control-label"></label>
+                    <input asp-for="OceanFreightETA" class="form-control" required />
+                    <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TimeToYard" class="control-label"></label>
+                    <input asp-for="TimeToYard" class="form-control" />
+                    <span asp-validation-for="TimeToYard" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="HandlerName" class="control-label"></label>
+                    <input asp-for="HandlerName" class="form-control" required />
+                    <span asp-validation-for="HandlerName" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfCartageOnly" /> @Html.DisplayNameFor(model => model.IfCartageOnly)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireDelivery" /> @Html.DisplayNameFor(model => model.IfRequireDelivery)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireStorage" /> @Html.DisplayNameFor(model => model.IfRequireStorage)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfBookedCartage" /> @Html.DisplayNameFor(model => model.IfBookedCartage)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Reference" /> @Html.DisplayNameFor(model => model.Reference)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfEnteredCartonCloud" /> @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfInvoiced" /> @Html.DisplayNameFor(model => model.IfInvoiced)
+                    </label>
+                </div>
+                <div class="form-group">
+
+
+
+
+
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Instruction</span>
+                        </div>
+                        <textarea asp-for="SpecialInstruction" class="form-control" aria-label="With textarea" required></textarea>
+                    </div>
+
+
+
+
+
+
+                    <span asp-validation-for="SpecialInstruction" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</div>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<WebAuslink.Models.SeaContainer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="alert">Container Information</h1>
+<div class="container">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientCompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OceanFreightETA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContainerNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeToYard)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.HandlerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfCartageOnly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfRequireDelivery)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfRequireStorage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfBookedCartage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfInvoiced)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SpecialInstruction)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OceanFreightETA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContainerNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeToYard)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HandlerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfCartageOnly)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfRequireDelivery)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfRequireStorage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfBookedCartage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfEnteredCartonCloud)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfInvoiced)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SpecialInstruction)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ContainerNumber">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ContainerNumber">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ContainerNumber">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

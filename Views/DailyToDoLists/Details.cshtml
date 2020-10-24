@@ -1,0 +1,42 @@
+﻿@model WebAuslink.Models.DailyToDoList
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DailyToDoList</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.today)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.today)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MorningJob)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MorningJob)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AfternoonJob)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AfternoonJob)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExtraWork)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExtraWork)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

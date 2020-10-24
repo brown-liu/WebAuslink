@@ -1,0 +1,126 @@
+﻿@model IEnumerable<WebAuslink.Models.SeaContainer>
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+
+
+
+
+<body>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="display-4">Welcome</h1>
+            <p class="lead text-muted">Auslink Operating Support </p>
+        </div>
+    </section>
+
+</body>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Client
+                </th>
+                <th>
+                    Ocean/F ETA
+                </th>
+                <th>
+                    Container NO.
+                </th>
+                <th>
+                    Day To Yard
+                </th>
+
+                <th>
+                    Handler
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfCartageOnly)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfRequireDelivery)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfRequireStorage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfBookedCartage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfInvoiced)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SpecialInstruction)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+
+                    <a asp-controller="Home"      asp-action="containerDetails" asp-route-id="@item.ContainerNumber">Details</a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OceanFreightETA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContainerNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeToYard)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.HandlerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfCartageOnly)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfRequireDelivery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfRequireStorage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfBookedCartage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfEnteredCartonCloud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfInvoiced)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialInstruction)
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

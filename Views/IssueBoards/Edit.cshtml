@@ -1,0 +1,51 @@
+﻿@model WebAuslink.Models.IssueBoard
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>IssueBoard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="IssueTitle" class="control-label"></label>
+                <input asp-for="IssueTitle" class="form-control" />
+                <span asp-validation-for="IssueTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WhoRaisedThisIssue" class="control-label"></label>
+                <input asp-for="WhoRaisedThisIssue" class="form-control" />
+                <span asp-validation-for="WhoRaisedThisIssue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="issueDescription" class="control-label"></label>
+                <input asp-for="issueDescription" class="form-control" />
+                <span asp-validation-for="issueDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IfIssueIsSolved" /> @Html.DisplayNameFor(model => model.IfIssueIsSolved)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="WhoSolvedIssue" class="control-label"></label>
+                <input asp-for="WhoSolvedIssue" class="form-control" />
+                <span asp-validation-for="WhoSolvedIssue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

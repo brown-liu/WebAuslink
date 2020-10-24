@@ -1,0 +1,89 @@
+﻿
+@model WebAuslink.Models.SeaContainer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Container Details</h1>
+<hr />
+
+<div class="container">
+
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OceanFreightETA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OceanFreightETA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TimeToYard)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TimeToYard)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientCompanyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClientCompanyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HandlerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HandlerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfCartageOnly)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfCartageOnly)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfRequireDelivery)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfRequireDelivery)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfRequireStorage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfRequireStorage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfBookedCartage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfBookedCartage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reference)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reference)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfEnteredCartonCloud)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IfInvoiced)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IfInvoiced)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecialInstruction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecialInstruction)
+        </dd>
+    </dl>
+</div>
+
