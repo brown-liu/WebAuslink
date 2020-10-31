@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using WebAuslink.Data;
 using WebAuslink.Models;
 
+
 namespace WebAuslink.Controllers
 {
     [Authorize]
@@ -26,11 +27,36 @@ namespace WebAuslink.Controllers
         }
 
         public async Task<IActionResult> Index()
+      
         {
+                var Temp =  _context.Client;
+                var namelist=Temp.Where(m => m.IfAccountIsOnHold);
+            ViewData["OnHoldList"] = namelist;
+            if (!namelist.Any())
+            { 
+            ViewData["IfNone"] = "none";
+            }
+
+            var all_list = await _context.DailyToDoList.ToListAsync();
+
+
+            var TempToDoList = from s in all_list
+                       where (s.today.Date - DateTime.Today.Date).Days <= 2 && (s.today.Date - DateTime.Today.Date).Days >= 0
+                       select s;
+            ViewBag.TodayList = TempToDoList.OrderBy(m => m.today);
+
+            return View();
+
+
+
+
+
             return  View( await _context.SeaContainer.ToListAsync());
         }
+   
 
-       
+
+
 
         public IActionResult Privacy()
         {

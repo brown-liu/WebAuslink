@@ -22,5 +22,6 @@ namespace WebAuslink.Data
         public DbSet<WebAuslink.Models.DailyToDoList> DailyToDoList { get; set; }
         public DbSet<WebAuslink.Models.IssueBoard> IssueBoard { get; set; }
 
+
     }
 }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebAuslink.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    
+
+
+        <table class="table">
+            <h2 style="text-align:center">  Client Account Status  </h2>
+            <thead>
+                <tr>
+
+                    <th>
+                        Client Name
+
+                    </th>
+                    <th></th>
+                    <th>
+                       If account on hold
+                    </th>
+
+                    <th>
+                        Last updated
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                        </td>
+                        <td>
+                            <button class=" btn btn-outline-primary">     <a asp-route-id="@item.Id" asp-action="EditOnHoldStatus">Change Status</a> </button>
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IfAccountIsOnHold)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastUpdate)
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebAuslink.Models.SeaContainer>
+﻿@*@model IEnumerable<WebAuslink.Models.SeaContainer>*@
+@model IEnumerable<WebAuslink.Models.DailyToDoList>
 @{
     ViewData["Title"] = "Home Page";
 
@@ -8,119 +9,103 @@
 
 
 
-<body>
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="display-4">Welcome</h1>
+<body >
+    <div class="container-fluid" >
+        <section class="jumbotron text-center">
+
+            <h1 class="heading">Welcome</h1>
             <p class="lead text-muted">Auslink Operating Support </p>
-        </div>
-    </section>
+            <hr />
+
+
+            <div class="row" style="display: @ViewData["IfNone"]">
+                <div class="col">
+                    <div class="alert alert-dark" role="alert">
+                        <h4>  <span class="badge badge-pill badge-danger">
+                            
+                                Account on hold
+                        </span></h4>
+                        @foreach (var client in ViewBag.OnHoldList)
+                        {
+                            <ul style="font-size:medium">
+                             
+                                    @client.ClientCompanyName
+                                <hr>  
+                                
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="alert alert-dark" role="alert">
+                <div style="text-align:left">
+                    <button class="btn btn-outline-primary " type="submit">
+                        <a asp-controller="DailyToDoLists" asp-action="Index">
+
+                            Go to all plans
+                        </a>
+                    </button>
+                </div>
+                @foreach (var item in ViewBag.TodayList)
+
+                {
+
+                    <div class="row">
+                        <div class=" col">
+                            <div class="alert alert-secondary" role="alert">
+                                @if (item.today.Date == DateTime.Now.Date)
+                                {
+                                    <h4 class="alert-heading" style="text-align:center"> <span class="badge badge-pill badge-success"> Today</span> </h4>
+                                }
+                                else
+                                {
+                            <h4 class="alert-heading" style="text-align:center"> Coming Jobs @@ @item.today</h4>
+                                }
+
+                                <ul>
+                                   
+                                    <hr>
+                                    <p style="font-size:medium">
+                                        @item.MorningJob
+                                    </p>
+                                    <hr>
+                                    <p style="font-size:medium">
+                                        @item.AfternoonJob
+                                    </p>
+                                    <hr>
+                                    <p style="font-size:medium">
+                                        @item.ExtraWork
+                                    </p>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div >
+
+
+
+
+        </section>
+ 
+</div>
+   
+    
+    
+
+
+
 
 </body>
-<div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-
-                </th>
-                <th>
-                    Client
-                </th>
-                <th>
-                    Ocean/F ETA
-                </th>
-                <th>
-                    Container NO.
-                </th>
-                <th>
-                    Day To Yard
-                </th>
-
-                <th>
-                    Handler
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfCartageOnly)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfRequireDelivery)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfRequireStorage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfBookedCartage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reference)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfInvoiced)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SpecialInstruction)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-
-                    <a asp-controller="Home"      asp-action="containerDetails" asp-route-id="@item.ContainerNumber">Details</a>
-
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientCompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OceanFreightETA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContainerNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeToYard)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.HandlerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfCartageOnly)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfRequireDelivery)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfRequireStorage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfBookedCartage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reference)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfEnteredCartonCloud)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfInvoiced)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SpecialInstruction)
-                </td>
-
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
 

@@ -4,83 +4,114 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="container-fluid">
+    <h3>@Html.DisplayFor(m => m.ContainerNumber)</h3>
+    <h4>Edit Container</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ContainerNumber" />
+                <div class="form-group">
+                    <label asp-for="OceanFreightETA" class="control-label"></label>
+                    <input asp-for="OceanFreightETA" class="form-control" value="@Model.OceanFreightETA.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
+                </div>
 
-<h4>SeaContainer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ContainerNumber" />
-            <div class="form-group">
-                <label asp-for="OceanFreightETA" class="control-label"></label>
-                <input asp-for="OceanFreightETA" class="form-control" />
-                <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeToYard" class="control-label"></label>
-                <input asp-for="TimeToYard" class="form-control" />
-                <span asp-validation-for="TimeToYard" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClientCompanyName" class="control-label"></label>
-                <input asp-for="ClientCompanyName" class="form-control" />
-                <span asp-validation-for="ClientCompanyName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HandlerName" class="control-label"></label>
-                <input asp-for="HandlerName" class="form-control" />
-                <span asp-validation-for="HandlerName" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfCartageOnly" /> @Html.DisplayNameFor(model => model.IfCartageOnly)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfRequireDelivery" /> @Html.DisplayNameFor(model => model.IfRequireDelivery)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfRequireStorage" /> @Html.DisplayNameFor(model => model.IfRequireStorage)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfBookedCartage" /> @Html.DisplayNameFor(model => model.IfBookedCartage)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Reference" /> @Html.DisplayNameFor(model => model.Reference)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfEnteredCartonCloud" /> @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IfInvoiced" /> @Html.DisplayNameFor(model => model.IfInvoiced)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpecialInstruction" class="control-label"></label>
-                <input asp-for="SpecialInstruction" class="form-control" />
-                <span asp-validation-for="SpecialInstruction" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="TimeToYard" class="control-label"></label>
+
+                    @if (Model.TimeToYard != null)
+                    {
+                        <input asp-for="TimeToYard" class="form-control" value="@Model.TimeToYard?.ToString("yyyy-MM-dd")" />
+
+                    }
+                    else
+                    {
+                        <input asp-for="TimeToYard" class="form-control" />
+                    }
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <label asp-for="ClientCompanyName" class="control-label"></label>
+                    <input asp-for="ClientCompanyName" class="form-control" />
+                    <span asp-validation-for="ClientCompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HandlerName" class="control-label"></label>
+                    <input asp-for="HandlerName" class="form-control" />
+                    <span asp-validation-for="HandlerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CCPONumber" class="control-label"></label>
+                    <input asp-for="CCPONumber" class="form-control" />
+                    <span asp-validation-for="CCPONumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfCartageOnly" /> @Html.DisplayNameFor(model => model.IfCartageOnly)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireDelivery" /> @Html.DisplayNameFor(model => model.IfRequireDelivery)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireStorage" /> @Html.DisplayNameFor(model => model.IfRequireStorage)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfBookedCartage" /> @Html.DisplayNameFor(model => model.IfBookedCartage)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Reference" /> @Html.DisplayNameFor(model => model.Reference)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfEnteredCartonCloud" /> @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfInvoiced" /> @Html.DisplayNameFor(model => model.IfInvoiced)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="JobFullyCompleted" /> Please Tick once you confirm Job is fully completed(Including all invoices).<span class="badge badge-warning">Warning</span>
+                    </label>
+                </div>
+                <div class="form-group" style="white-space:nowrap;overflow">
+                    <label asp-for="SpecialInstruction" class="control-label"></label>
+                    <input asp-for="SpecialInstruction" class="form-control" />
+                    <span asp-validation-for="SpecialInstruction" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
+</div>

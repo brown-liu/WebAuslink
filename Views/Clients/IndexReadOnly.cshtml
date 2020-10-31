@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebAuslink.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="container-fluid">
+    <h1>Rate Card List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClientCompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastUpdate)
+
+                </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        <a asp-action="DetailsReadOnly" asp-route-id="@item.Id">Details</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdate)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

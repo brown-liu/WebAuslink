@@ -4,42 +4,44 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container">
+    <h1>Create Plan</h1>
 
-<h4>DailyToDoList</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="today" class="control-label"></label>
-                <input asp-for="today" class="form-control" />
-                <span asp-validation-for="today" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MorningJob" class="control-label"></label>
-                <input asp-for="MorningJob" class="form-control" />
-                <span asp-validation-for="MorningJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AfternoonJob" class="control-label"></label>
-                <input asp-for="AfternoonJob" class="form-control" />
-                <span asp-validation-for="AfternoonJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExtraWork" class="control-label"></label>
-                <input asp-for="ExtraWork" class="form-control" />
-                <span asp-validation-for="ExtraWork" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label> Date of plan</label>
+                    <input asp-for="today" class="form-control" />
+                    <span asp-validation-for="today" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Morning Jobs (8:00 - 12:00)</label>
+                    <textarea asp-for="MorningJob" class="form-control" placeholder=" who will need to do what at what time?" style="height:150px"></textarea>
+                    <span asp-validation-for="MorningJob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Afternoon Jobs (12:00 - 17:00)</label>
+                    <textarea asp-for="AfternoonJob" class="form-control" placeholder=" who will need to do what at what time?" style="height:150px"></textarea>
+                    <span asp-validation-for="AfternoonJob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Extra or after hour works</label>
+                    <textarea asp-for="ExtraWork" class="form-control" placeholder=" Any special notice today?"> </textarea>
+                    <span asp-validation-for="ExtraWork" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -1,7 +1,7 @@
 ﻿@model WebAuslink.Models.User
 
 @{
-    Layout = null;
+  
 }
 
 <!DOCTYPE html>
@@ -49,9 +49,7 @@
             </div>
         </div>
 
-        <div>
-            <a asp-controller="Account"  asp-action="login">Already sign up?</a>
-        </div>
+      
     </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using WebAuslink.Data;
 using WebAuslink.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
+
 
 namespace WebAuslink.Controllers
 {[Authorize]
@@ -24,9 +26,163 @@ namespace WebAuslink.Controllers
         }
 
         // GET: SeaContainers
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index(int pageNumber=1)
+        //{
+
+
+
+        //    return View(await Paging<SeaContainer>.CreateAsync( _context.SeaContainer, pageNumber,20));
+        //}
+
+
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string SearchString,
+            int? pageNumber)
         {
-            return View(await _context.SeaContainer.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["YardSortParm"] = String.IsNullOrEmpty(sortOrder) ? "T2Yard_desc" : "";
+            ViewData["OFSortParm"] = sortOrder == "ofeta" ? "ofeta_desc" : "ofeta";
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else {
+                SearchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = currentFilter;
+            var CTNS = from c in _context.SeaContainer select c;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                CTNS = CTNS.Where(s => s.ContainerNumber.Contains(SearchString) || s.ClientCompanyName.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "T2Yard_desc":
+                    CTNS = CTNS.OrderBy(c => c.TimeToYard);
+                    break;
+                case "ofeta_desc":
+                    CTNS = CTNS.OrderBy(c => c.OceanFreightETA);
+                    break;
+                case "ofeta":
+                    CTNS = CTNS.OrderByDescending(c => c.OceanFreightETA);
+                    break;
+                default:
+                    CTNS = CTNS.OrderByDescending(c => c.TimeToYard);
+                    break;
+
+
+            }
+            return View(await Paging<SeaContainer>.CreateAsync(CTNS.AsNoTracking(), pageNumber??1, 20));
+
+
+        }
+
+        public async Task<IActionResult> Index_Cartage_Only(
+            string sortOrder,
+            string currentFilter,
+            string SearchString,
+            int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["YardSortParm"] = String.IsNullOrEmpty(sortOrder) ? "T2Yard_desc" : "";
+            ViewData["OFSortParm"] = sortOrder == "ofeta" ? "ofeta_desc" : "ofeta";
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = currentFilter;
+            var CTNS = from c in _context.SeaContainer 
+                       where c.IfCartageOnly == true &&c.JobFullyCompleted==false
+                       select c
+                       ;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                CTNS = CTNS.Where(s => s.ContainerNumber.Contains(SearchString) || s.ClientCompanyName.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "T2Yard_desc":
+                    CTNS = CTNS.OrderBy(c => c.TimeToYard);
+                    break;
+                case "ofeta_desc":
+                    CTNS = CTNS.OrderBy(c => c.OceanFreightETA);
+                    break;
+                case "ofeta":
+                    CTNS = CTNS.OrderByDescending(c => c.OceanFreightETA);
+                    break;
+                default:
+                    CTNS = CTNS.OrderByDescending(c => c.TimeToYard);
+                    break;
+
+
+            }
+            return View(await Paging<SeaContainer>.CreateAsync(CTNS.AsNoTracking(), pageNumber ?? 1, 20));
+
+
+        }
+
+
+
+        public async Task<IActionResult> Index_Yard_Inbounds(
+            string sortOrder,
+            string currentFilter,
+            string SearchString,
+            int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["YardSortParm"] = String.IsNullOrEmpty(sortOrder) ? "T2Yard_desc" : "";
+            ViewData["OFSortParm"] = sortOrder == "ofeta" ? "ofeta_desc" : "ofeta";
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = currentFilter;
+            var CTNS = from c in _context.SeaContainer
+                       where c.IfCartageOnly==false &&c.JobFullyCompleted==false
+                       select c;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                CTNS = CTNS.Where(s => s.ContainerNumber.Contains(SearchString) || s.ClientCompanyName.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "T2Yard_desc":
+                    CTNS = CTNS.OrderBy(c => c.TimeToYard);
+                    break;
+                case "ofeta_desc":
+                    CTNS = CTNS.OrderBy(c => c.OceanFreightETA);
+                    break;
+                case "ofeta":
+                    CTNS = CTNS.OrderByDescending(c => c.OceanFreightETA);
+                    break;
+                default:
+                    CTNS = CTNS.OrderByDescending(c => c.TimeToYard);
+                    break;
+
+
+            }
+            return View(await Paging<SeaContainer>.CreateAsync(CTNS.AsNoTracking(), pageNumber ?? 1, 20));
+
+
         }
 
 
@@ -50,8 +206,23 @@ namespace WebAuslink.Controllers
         }
 
 
+        [AcceptVerbs("GET", "POST")]
 
+        public IActionResult Verify_Container_Number(string containerNumber)
+        {
+            foreach (var item in _context.SeaContainer)
+            {
+                if (item.ContainerNumber == containerNumber)
+                {
 
+                    return Json($"Container # {containerNumber} already exists");
+                        
+                }
+                
+            }
+            return Json("Please enter container Number carefully!");
+
+        }
 
 
         // GET: SeaContainers/Create
@@ -70,6 +241,7 @@ namespace WebAuslink.Controllers
             }
 
             ViewBag.ClientList = nameList;
+            ViewBag.YardList = new List<string>{"East Tamaki","Mt Wellington","Others (Cartage Job Only)" };
 
             //var ClientModel = _client;
             return View();
@@ -83,11 +255,26 @@ namespace WebAuslink.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContainerNumber,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        public async Task<IActionResult> Create([Bind("ContainerNumber,DestinationSite,CCPONumber,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainerTemp)
         {
+            //var ContainerList = await _context.SeaContainer.ToListAsync();
+
+            //string ThisContainerNumber = seaContainerTemp.ContainerNumber;
+
+            //foreach (var Con in ContainerList)
+            //{
+            //    if (true)
+            //    {
+            //        ModelState.AddModelError("", "Container Number repeated, Please add space + Letter to override!");
+            //         return View(seaContainerTemp);
+            //    }
+            //}   ABOVE CODE IS WRONG SOMEHOW???????????
+           
+
             if (ModelState.IsValid)
             {
-                _context.Add(seaContainer);
+                _context.Add(seaContainerTemp);
+               ViewBag.IsSuccess = true;
                 
                  await _context.SaveChangesAsync();
 
@@ -95,7 +282,7 @@ namespace WebAuslink.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(seaContainer);
+            return View(seaContainerTemp);
         }
 
 
@@ -103,7 +290,21 @@ namespace WebAuslink.Controllers
 
 
 // GET: SeaContainers/Edit/5
-public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var seaContainer = await _context.SeaContainer.FindAsync(id);
+            if (seaContainer == null)
+            {
+                return NotFound();
+            }
+            return View(seaContainer);
+        }
+        public async Task<IActionResult> Edit_Yard_Inbounds(string id)
         {
             if (id == null)
             {
@@ -118,12 +319,99 @@ public async Task<IActionResult> Edit(string id)
             return View(seaContainer);
         }
 
+        public async Task<IActionResult> Edit_Cartage_Only(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var seaContainer = await _context.SeaContainer.FindAsync(id);
+            if (seaContainer == null)
+            {
+                return NotFound();
+            }
+            return View(seaContainer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Cartage_Only(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        {
+            if (id != seaContainer.ContainerNumber)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(seaContainer);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SeaContainerExists(seaContainer.ContainerNumber))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index_Cartage_Only));
+            }
+            return View(seaContainer);
+        }
+
+
+        public IActionResult instruciton()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Yard_Inbounds(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        {
+            if (id != seaContainer.ContainerNumber)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(seaContainer);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SeaContainerExists(seaContainer.ContainerNumber))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index_Yard_Inbounds));
+            }
+            return View(seaContainer);
+        }
+
         // POST: SeaContainers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ContainerNumber,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        public async Task<IActionResult> Edit(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
         {
             if (id != seaContainer.ContainerNumber)
             {

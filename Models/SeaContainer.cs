@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using WebAuslink.Services;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAuslink.Models
 {
     public class SeaContainer
     {
+        public SeaContainer()
+        {
+            this.JobFullyCompleted = false;
+        }
+      
+        [Display(Name = "Yard")]
+        public string DestinationSite { get; set; }
+
+        public bool JobFullyCompleted { get; set; }
+
         [Key]
         [Display(Name ="Container No.")]
+        [Remote (action:"Verify_Container_Number",controller:"SeaContainer")]
         public String ContainerNumber { get; set; }
 
         [DataType(DataType.Date)]
@@ -52,5 +63,9 @@ namespace WebAuslink.Models
         [Required(ErrorMessage = "Please put special information here. Be short but be ac")]
 
         public string SpecialInstruction { get; set; }
+
+        public string CCPONumber { get; set; }
+
+      
     }
 }

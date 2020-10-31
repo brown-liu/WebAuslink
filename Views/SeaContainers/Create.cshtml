@@ -1,114 +1,183 @@
 ﻿@model WebAuslink.Models.SeaContainer
-
 @*@using WebAuslink.Models
-@model IEnumerable<WebAuslink.Data.WebAuslinkContext>  ClientModel;*@
+    @model IEnumerable<WebAuslink.Data.WebAuslinkContext>  ClientModel;*@
 
 
 @{
     ViewData["Title"] = "Create";
 }
-<div class="container">
-    <h1>Create</h1>
 
-    <h4>SeaContainer</h4>
+
+@if (ViewBag.IsSuccess == true)
+{
+    <div class="alart alert-success alert-dismissible fade show" role="alert">
+
+        <p>  <strong>Great! </strong> Container created successfully!  <p>
+    </div>
+
+}
+
+
+
+
+
+<div class="container-fluid">
+    <h4> Create Sea Container</h4>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div class="form-group">
-                    <label asp-for="ClientCompanyName" class="control-label"></label>
-                    <select asp-for="ClientCompanyName" class="form-control" asp-items="new SelectList(ViewBag.ClientList)" required>
-                        <option value="">Please select shipper name</option>
-                    </select>
-                    <span asp-validation-for="ClientCompanyName" class="text-danger">  </span>
-                </div>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ContainerNumber" class="control-label"></label>
-                    <input asp-for="ContainerNumber" class="form-control" required />
-                    <span asp-validation-for="ContainerNumber" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="OceanFreightETA" class="control-label"></label>
-                    <input asp-for="OceanFreightETA" class="form-control" required />
-                    <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TimeToYard" class="control-label"></label>
-                    <input asp-for="TimeToYard" class="form-control" />
-                    <span asp-validation-for="TimeToYard" class="text-danger"></span>
-                </div>
 
-                <div class="form-group">
-                    <label asp-for="HandlerName" class="control-label"></label>
-                    <input asp-for="HandlerName" class="form-control" required />
-                    <span asp-validation-for="HandlerName" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfCartageOnly" /> @Html.DisplayNameFor(model => model.IfCartageOnly)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfRequireDelivery" /> @Html.DisplayNameFor(model => model.IfRequireDelivery)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfRequireStorage" /> @Html.DisplayNameFor(model => model.IfRequireStorage)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfBookedCartage" /> @Html.DisplayNameFor(model => model.IfBookedCartage)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Reference" /> @Html.DisplayNameFor(model => model.Reference)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfEnteredCartonCloud" /> @Html.DisplayNameFor(model => model.IfEnteredCartonCloud)
-                    </label>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="IfInvoiced" /> @Html.DisplayNameFor(model => model.IfInvoiced)
-                    </label>
-                </div>
-                <div class="form-group">
+    <form asp-action="Create" id="fform">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label>Client </label>
+                <select asp-for="ClientCompanyName" class="form-control form-control-user" asp-items="new SelectList(ViewBag.ClientList)" required>
+                    <option value="">Please select shipper name</option>
+                </select>
+                <span asp-validation-for="ClientCompanyName" class="text-danger">  </span>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="DestinationSite" class="control-label form-control-user"></label>
+                <select asp-for="DestinationSite" asp-items="new SelectList(ViewBag.YardList)" class=" form-control form-control-user" required>
+                    <option value="">Please select Destination</option>
+                </select>
+                <span asp-validation-for="DestinationSite" class="text-danger"></span>
+            </div>
+
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="ContainerNumber" class="control-label form-control-user"></label>
+                <input id="containerNumber" asp-for="ContainerNumber" class="form-control form-control-user" required />
+                <span id="display_container_number_check"  class="text-danger"></span>
+            </div>
+            <script type="text/javascript">
+
+                function StopWork(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                document.getElementById("containerNumber").onkeyup = function checkKey() {
+                    var ctnr = $("#containerNumber").val();
+                    $.ajax({
+                        url: `/seacontainers/Verify_Container_Number?containerNumber=${ctnr}`,
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('#display_container_number_check').html(data);
+
+                            if (data != "Please enter container Number carefully!") {
+                                alert("Container number already exists, please confirm. If this Container is reused, please add 'space + R' at back of the container Number ");
+                                $("#create_container_button").on("click", StopWork);
+                            }
+
+                            else {
+                                $("#create_container_button").off("click", StopWork);
+                                
+                            }
+
+                        }
+
+                    });
+
+                }
+            </script>
 
 
-
-
-
-                    <div class="input-group">
-
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Instruction</span>
-                        </div>
-                        <textarea asp-for="SpecialInstruction" class="form-control" aria-label="With textarea" required></textarea>
-                    </div>
-
-
-
-
-
-
-                    <span asp-validation-for="SpecialInstruction" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            <div class="col-md-6 mb-3">
+                <label class="control-label form-control-user">Carton Cloud PO Number (Fill once PO is made)</label>
+                <input asp-for="CCPONumber" class="form-control form-control-user" />
+                <span asp-validation-for="CCPONumber" class="text-danger"></span>
+            </div>
         </div>
-    </div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
 
+
+
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label >Ocean Freight ETA as per BL</label>
+                <input asp-for="OceanFreightETA" class="form-control" required />
+                <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Date To Yard (Fill once VBS is confirmed)</label>
+                <input asp-for="TimeToYard" class="form-control" />
+                <span asp-validation-for="TimeToYard" class="text-danger"></span>
+            </div>
+          
+
+        </div>
+
+
+
+        <div class="form-row">
+            <div class="col">
+                <label class="control-label">Handler Name (Person Who passed this job to Warehouse)</label>
+                <input asp-for="HandlerName" class="form-control" required />
+                <span asp-validation-for="HandlerName" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfCartageOnly" /> Job is Cartage ONLY
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireDelivery" /> Require LCL Delivery
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfRequireStorage" /> Need Storage
+                    </label>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfBookedCartage" /> Cartage Booked
+                    </label>
+                </div>
+
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfEnteredCartonCloud" /> PO Charge Checked
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IfInvoiced" /> Xero or CC Invoice confirmed
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+
+
+            <div class="input-group-prepend">
+                <span class="input-group-text">Instruction</span>
+
+                <textarea asp-for="SpecialInstruction" class="form-control" aria-label="With textarea" required></textarea>
+            </div>
+            <span asp-validation-for="SpecialInstruction" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="create_container_button" value="Create " class="btn btn-primary" />
+        </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
+
+

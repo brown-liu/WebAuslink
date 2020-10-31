@@ -16,5 +16,20 @@ namespace WebAuslink.Controllers
         {
             return View();
         }
+
+        public IActionResult sop_main()
+        { 
+            return View();
+        }
+
+        public IActionResult auslink_structure()
+
+        {
+            return View();
+        }
+
+
     }
+
+
 }

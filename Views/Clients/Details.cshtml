@@ -3,28 +3,227 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="container-fluid">
+    <h1>Rate Card</h1>
 
-<h1>Details</h1>
+    <div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+        <hr />
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
 
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientCompanyName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClientCompanyName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientRateSheetID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClientRateSheetID)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                <div>
+                    @Html.DisplayNameFor(model => model.ClientCompanyName)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.ClientCompanyName)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageRate20)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageRate20)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageRateSingle20)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageRateSingle20)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageRate40)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageRate40)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageRateSingle40)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageRateSingle40)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageFAF)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageFAF)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.VGM)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.VGM)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.ATF)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.ATF)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.MPI)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.MPI)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.CartageVBS)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.CartageVBS)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.UnpackM)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.UnpackM)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.UnpackP)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.UnpackP)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge1)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge1)
+                </span>
+            </li>
+
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge2)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge2)
+                </span>
+
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge3)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge3)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge4)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge4)
+                </span>
+            </li>
+            <li class="list-group-item">
+
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge5)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge5)
+                </span>
+
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge6)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge6)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge7)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge7)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.OtherCharge8)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.OtherCharge8)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.ChargePerCBM)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.ChargePerCBM)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.ChargePerPLT)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.ChargePerPLT)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.ChargePerFullTruckLoad)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.ChargePerFullTruckLoad)
+                </span>
+
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.SpecialCharges1)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.SpecialCharges1)
+                </span>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    @Html.DisplayNameFor(model => model.SpecialCharges2)
+                </div>
+                <span class="badge badge-success">
+                    @Html.DisplayFor(model => model.SpecialCharges2)
+                </span>
+            </li>
+
+        </ul>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>

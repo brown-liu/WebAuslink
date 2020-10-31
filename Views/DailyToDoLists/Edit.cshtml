@@ -3,44 +3,44 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="container">
 
-<h1>Edit</h1>
+    <h3 style="text-align:center">Edit Plan</h3>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-group">
+                    <label asp-for="today" class="control-label"></label>
+                    <input asp-for="today" class="form-control" />
+                    <span asp-validation-for="today" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MorningJob" class="control-label"></label>
+                    <textarea asp-for="MorningJob" class="form-control" style="height:150px"> </textarea>
+                    <span asp-validation-for="MorningJob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AfternoonJob" class="control-label"  ></label>
+                    <textarea asp-for="AfternoonJob" class="form-control" style="height:150px"></textarea>
+                    <span asp-validation-for="AfternoonJob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExtraWork" class="control-label"></label>
+                    <textarea asp-for="ExtraWork" class="form-control"></textarea>
+                    <span asp-validation-for="ExtraWork" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
 
-<h4>DailyToDoList</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id" />
-            <div class="form-group">
-                <label asp-for="today" class="control-label"></label>
-                <input asp-for="today" class="form-control" />
-                <span asp-validation-for="today" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MorningJob" class="control-label"></label>
-                <input asp-for="MorningJob" class="form-control" />
-                <span asp-validation-for="MorningJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AfternoonJob" class="control-label"></label>
-                <input asp-for="AfternoonJob" class="form-control" />
-                <span asp-validation-for="AfternoonJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExtraWork" class="control-label"></label>
-                <input asp-for="ExtraWork" class="form-control" />
-                <span asp-validation-for="ExtraWork" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

@@ -1,31 +1,88 @@
 ﻿
 
+
+@section NavTop
+{
+    <div>
+        <i class="fa fa-ambulance" aria-hidden="true"></i>
+        <a asp-controller="IssueBoards" asp-action="Index">Raise an issue if Any</a>
+    </div>
+}
 <div class="container-fluid">
-    <h2 class="alert-info"> Daily Check List  </h2>
+    <div style="margin-bottom:20px">
+        <h2 style="text-align:center " class="alert-danger"> Warnings  </h2>
+        <table class="table">
+            <tbody>
+                <tr>
 
-    <ul>
-        <li>All SO finallized </li>
-        <li>All PO finallized </li>
-        <li>Next day Plan is Done </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-    </ul>
+                    <td>Inbound cargo</td>
+                    <td><span class="badge badge-danger" style="font-size:large">All cargo must be labelled before finish work if labelling can not be done immediately after arrival.</span></td>
+                </tr>
+                <tr>
 
-    <a href="#">Raise an issue if Any</a>
+                    <td>Client picks </td>
+                    <td> <span class="badge badge-danger" style="font-size:large">No cargo released without Sales Order and signature</span></td>
+                </tr>
+                <tr>
+
+                    <td>Imported cargo & FAK</td>
+                    <td><span class="badge badge-danger" style="font-size:large">Make sure Custom D.O , MPI (BACC) and Auslink SO is available before release.</span></td>
+                </tr>
+            </tbody>
+        </table>
 
 
-    <h2 class="alert-info">Weekly Check List</h2>
 
-    <ul>
-        <li>All SO finallized </li>
-        <li>All PO finallized </li>
-        <li>Next day Plan is Done </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-        <li>All SO finallized </li>
-    </ul>
-    <a href="#">Raise an issue if Any</a>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <h2 style="text-align:center " class="alert-warning"> Daily Check List  </h2>
+        <table class="table">
+            <tbody>
+                <tr>
+
+                    <td>Inbound cargo</td>
+                    <td><span class="badge badge-danger" style="font-size:large">All cargo must be labelled before finish work if labelling can not be done immediately after arrival.</span></td>
+                </tr>
+                <tr>
+
+                    <td>Client picks </td>
+                    <td> <span class="badge badge-danger" style="font-size:large">No cargo released without Sales Order and signature</span></td>
+                </tr>
+                <tr>
+
+                    <td>Imported cargo & FAK</td>
+                    <td><span class="badge badge-danger" style="font-size:large">Make sure Custom D.O , MPI (BACC) and Auslink SO is available before release.</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+    <div style="margin-bottom:20px">
+        <h2 style="text-align:center " class="alert-warning"> Weekly Check List  </h2>
+        <table class="table">
+            <tbody>
+                <tr>
+
+                    <td>Inbound cargo</td>
+                    <td><span class="badge badge-danger" style="font-size:large">All cargo must be labelled before finish work if labelling can not be done immediately after arrival.</span></td>
+                </tr>
+                <tr>
+
+                    <td>Client picks </td>
+                    <td> <span class="badge badge-danger" style="font-size:large">No cargo released without Sales Order and signature</span></td>
+                </tr>
+                <tr>
+
+                    <td>Imported cargo & FAK</td>
+                    <td><span class="badge badge-danger" style="font-size:large">Make sure Custom D.O , MPI (BACC) and Auslink SO is available before release.</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
 </div>

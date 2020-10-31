@@ -246,10 +246,85 @@ namespace WebAuslink.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ATF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageFAF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageRate20")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageRate40")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageRateSingle20")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageRateSingle40")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartageVBS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChargePerCBM")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChargePerFullTruckLoad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChargePerPLT")
+                        .HasColumnType("int");
+
                     b.Property<string>("ClientCompanyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientRateSheetID")
+                    b.Property<bool>("IfAccountIsOnHold")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MPI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge6")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge7")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherCharge8")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecialCharges1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecialCharges2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnpackM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnpackP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VGM")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -339,8 +414,14 @@ namespace WebAuslink.Migrations
                     b.Property<string>("ContainerNumber")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CCPONumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ClientCompanyName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DestinationSite")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HandlerName")
@@ -363,6 +444,9 @@ namespace WebAuslink.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IfRequireStorage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("JobFullyCompleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("OceanFreightETA")

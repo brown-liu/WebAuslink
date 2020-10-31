@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAuslink.Data;
 using Microsoft.AspNetCore.Authorization;
+using WebAuslink.Models;
 
 
 
@@ -25,8 +26,14 @@ namespace WebAuslink.Models
         // GET: DailyToDoLists
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DailyToDoList.ToListAsync());
+            var ToDoList = from t in _context.DailyToDoList
+                           select t;
+            ToDoList = ToDoList.OrderByDescending(m=>m.today);
+            return View(await ToDoList.AsNoTracking().ToArrayAsync());
         }
+
+        
+
 
         // GET: DailyToDoLists/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -152,5 +159,9 @@ namespace WebAuslink.Models
         {
             return _context.DailyToDoList.Any(e => e.id == id);
         }
+
+      
+
+
     }
 }

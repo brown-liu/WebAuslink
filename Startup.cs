@@ -15,6 +15,7 @@ using WebAuslink.Repo;
 using WebAuslink.Helper;
 using WebAuslink.Services;
 
+
 namespace WebAuslink
 {
     public class Startup
@@ -39,7 +40,7 @@ namespace WebAuslink
             services.AddControllersWithViews();
             
             services.AddRazorPages().AddRazorRuntimeCompilation();
-
+            
 
             services.AddScoped<IAccountRepo,AccountRepo>();
             services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, ApplicationUserClaimsPrincipalFactory>();
@@ -74,7 +75,7 @@ namespace WebAuslink
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Landing}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

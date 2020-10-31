@@ -1,0 +1,214 @@
+﻿@model Paging<WebAuslink.Models.SeaContainer>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section NavTop
+{
+    <form method="get" asp-action="Index_Yard_Inbounds"   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input name="SearchString" value="@ViewData["CurrentFilter"]"  type="text" class="form-control bg-light border-0 small" placeholder="Search for Container Number of client name..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-primary" />
+               
+
+            </div>
+            <div style="margin-left:20px">
+                
+                <a class="btn btn-outline-primary"  asp-action="Index_Yard_Inbounds">Reset</a>
+            </div>
+        </div>
+    </form>
+
+
+}
+
+@if (ViewBag.Ok == true)
+{
+    <div class="alart alert-success alert-dismissible fade show" role="alert">
+
+        <p>  <strong>Great! </strong> Container created successfully!  <p>
+    </div>
+
+}
+
+<div class="container-fluid">
+    <div>
+        <a asp-action="Create" class=" btn btn-primary">Create New</a>
+        <div class="alart alert-primary">
+            <h1 class="h3 mb-1 text-gray-800" style="text-align:center">Container Scheduler - Inbound Auslink Logistics (Not completed)</h1>
+
+        </div>
+
+    </div>
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table w-auto small" id="dataTable" width="100%" cellspacing="0">
+
+                    <thead style="white-space:nowrap">
+                        <tr>
+                            <th></th>
+                            <th>
+                                Client
+                            </th>
+                            <th>
+                                Destination Yard
+                            </th>
+                            <th>
+                                <a asp-action="Index_Yard_Inbounds" asp-route-sortOrder="@ViewData["OFSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">O/F ETA</a>
+
+                            </th>
+                            <th>
+                                Container NO.
+                            </th>
+                            <th>
+                                PO No.
+                            </th>
+                            <th>
+                                <a asp-action="Index_Yard_Inbounds" asp-route-sortOrder="@ViewData["YardSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Day 2 Yard</a>
+                            </th>
+
+                            <th>
+                                Handler
+                            </th>
+                        
+                            <th>
+                                Require LCL
+                            </th>
+                            <th>
+                                Nd Storage
+                            </th>
+                            <th>
+                                Cartage Booked
+                            </th>
+
+                            <th>
+                                Charged in CC
+                            </th>
+                            <th>
+                                CC/XERO Invoiced
+                            </th>
+                            <th>
+                                Instruction
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td style="white-space:nowrap">
+                                    <a asp-action="Edit_Yard_Inbounds" asp-route-id="@item.ContainerNumber">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ContainerNumber">Check</a> 
+                                    
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem=>item.DestinationSite)
+                                    </td>
+
+                                <td style="white-space:nowrap">
+                                    @Html.DisplayFor(modelItem => item.OceanFreightETA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContainerNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CCPONumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TimeToYard)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HandlerName)
+                                </td>
+                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IfRequireDelivery)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IfRequireStorage)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IfBookedCartage)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IfEnteredCartonCloud)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IfInvoiced)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SpecialInstruction)
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @{
+        var PrevDisabled = !Model.PrevsiouPage ? "disabled" : "";
+        var nextDisabled = !Model.NextPage ? "disabled" : "";
+
+    }    <nav aria-label="Page navigation example">
+             <ul class="pagination">
+                 <li class="page-item">
+                     <a asp-action="Index" 
+                        asp-route-pageNumber="@(Model.PageIndex-1)" 
+                        class="page-link btn @PrevDisabled"
+                        asp-route-sortOrder="@ViewData["CurrentSort"]"
+                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                        >
+                         Previous
+                     </a>
+                 </li>
+                 @for (int i = 1; i <= Model.TotalPages; i++)
+                 {
+                     if (i == Model.PageIndex)
+                     {
+                         <li class="page-item active"><a class="page-link " asp-action="Index" asp-route-pageNumber="@i">@i</a></li>
+
+                     }
+                     else
+                     {
+                         <li class="page-item"><a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a></li>
+
+                     }
+                 }
+
+
+
+                 <li class="page-item">
+                     <a asp-action="Index" 
+                        asp-route-pageNumber="@(Model.PageIndex+1)" 
+                        class="btn page-link @nextDisabled"
+                        asp-route-sortOrder="@ViewData["CurrentSort"]"
+                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                        >
+                         Next
+                     </a>
+                 </li>
+             </ul>
+    </nav>
+</div>
+<!-- /.container-fluid -->
+<!-- End of Main Content -->
+
+
