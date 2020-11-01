@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAuslink.Data;
 
 namespace WebAuslink.Migrations
 {
     [DbContext(typeof(WebAuslinkContext))]
-    partial class WebAuslinkContextModelSnapshot : ModelSnapshot
+    [Migration("20201101034335_a1")]
+    partial class a1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,28 +356,6 @@ namespace WebAuslink.Migrations
                     b.HasKey("id");
 
                     b.ToTable("DailyToDoList");
-                });
-
-            modelBuilder.Entity("WebAuslink.Models.FileLoader", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Classification")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("pdfUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FileLoader");
                 });
 
             modelBuilder.Entity("WebAuslink.Models.IssueBoard", b =>

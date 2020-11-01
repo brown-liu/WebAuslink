@@ -21,7 +21,8 @@ namespace WebAuslink.Data
         public DbSet<WebAuslink.Models.Client> Client { get; set; }
         public DbSet<WebAuslink.Models.DailyToDoList> DailyToDoList { get; set; }
         public DbSet<WebAuslink.Models.IssueBoard> IssueBoard { get; set; }
-
+      
+        public DbSet<WebAuslink.Models.FileLoader> FileLoader { get; set; }
 
     }
 }

@@ -4,57 +4,70 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Report an issue</h1>
+<div class="container-fluid">
 
-<p>
-    <a asp-action="Create">Create New Issue</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+
+
+    <h1>Report an issue</h1>
+
+    <p>
+        <a class="btn btn-outline-primary" asp-action="Create">Report Issue</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WhoRaisedThisIssue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.issueDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IfIssueIsSolved)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WhoSolvedIssue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueDateRaised)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             
-            <th>
-                @Html.DisplayNameFor(model => model.IssueTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WhoRaisedThisIssue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.issueDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IfIssueIsSolved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WhoSolvedIssue)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IssueTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WhoRaisedThisIssue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.issueDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IfIssueIsSolved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WhoSolvedIssue)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                </td><td>
+                    @Html.DisplayFor(modelItem => item.IssueTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WhoRaisedThisIssue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.issueDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IfIssueIsSolved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WhoSolvedIssue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssueDateRaised)
+                </td>
+
+            </tr>
+        }
+            </tbody>
+        </table>
+</div>

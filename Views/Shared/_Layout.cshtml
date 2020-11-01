@@ -81,8 +81,7 @@
                         
                         <a class="collapse-item" asp-controller="DailyToDoLists" asp-action="Index">Daily Planner</a>
                         <a class="collapse-item" asp-controller="DisplayOnly" asp-action="CheckList">Check List</a>
-                        <a class="collapse-item" asp-controller="DisplayOnly" asp-action="sop_main">SOPs</a>
-                        <a class="collapse-item" asp-controller="Clients" asp-action="IndexReadOnly">Rates Reference</a>
+                
                     </div>
                 </div>
             </li>
@@ -101,10 +100,12 @@
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-controller="DisplayOnly" asp-action="auslink_structure">Auslink structure</a>
+                        <a class="collapse-item" asp-controller="DisplayOnly" asp-action="auslink_structure">Auslink staff contact</a>
 
-                        
+                        <a class="collapse-item" asp-controller="Clients" asp-action="IndexReadOnly">Rates Reference</a>
 
+                        <a class="collapse-item" asp-controller="DisplayOnly" asp-action="sop_auslink">SOP - Auslink</a>
+                        <a class="collapse-item" asp-controller="DisplayOnly" asp-action="sop_byclient">SOP by Client</a>
 
                     </div>
                 </div>
@@ -140,6 +141,7 @@
                         <a class="collapse-item" asp-controller="Clients" asp-action="Index">Client charges</a>
                         <a class="collapse-item" asp-controller="Account" asp-action="Signup">Add User</a>
                         <a class="collapse-item" asp-controller="clients" asp-action="Index_on_hold_status">Account On hold Notice</a>
+                        <a class="collapse-item" asp-controller="Admin" asp-action="UpLoadPdf">Up Load PDF</a>
                         <a class="collapse-item" href="">Report</a>
 
                     </div>

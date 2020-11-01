@@ -1,0 +1,69 @@
+﻿@model WebAuslink.Models.ObjectPDF
+
+@section NavTop
+{
+    @if (ViewBag.IsSuccess=="true")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Great!</strong> File uploaded successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (ViewBag.IsSuccess == "false")
+    {<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Something Wrong with the uploading.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    }
+    else { 
+    
+    }
+
+
+}
+
+<div class="container-fluid">
+    <h1> Up load SOPs   </h1>
+    <span class="badge badge-danger"> Must be in DPF format</span>
+    <div>
+        <form method="POST" asp-controller="admin" asp-action="UpLoadPdf" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="formGroupExampleInput"> File title</label>
+                <input type="text" class="form-control" asp-for="Title" placeholder="Example: YOYOSO SOP & Delivery Information" required>
+            </div>
+            <div >
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Classification" value="auslink" >
+                    <label class="form-check-label" for="exampleRadios1">
+                        SOP - Auslink Operation
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Classification" value="client">
+                    <label class="form-check-label" for="exampleRadios2">
+                        SOP - By Client
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label>Unload PDF here</label>
+                <input type="file" class="form-control-file" asp-for="pdf" placeholder="PDF file ONLY" required>
+            </div>
+            <input class="btn btn-primary" type="submit" />
+        </form>
+
+    </div>
+
+    <hr />  
+    <div>
+        <a  class="btn btn-primary" asp-controller="FileLoaders" asp-action="Index"> Check Existing Files    </a>
+
+    </div>
+
+</div>

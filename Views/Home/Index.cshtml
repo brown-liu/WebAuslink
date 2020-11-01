@@ -18,29 +18,128 @@
             <hr />
 
 
-            <div class="row" style="display: @ViewData["IfNone"]">
-                <div class="col">
+            <div class="row">
+                <div class="col" style="display: @ViewData["IfNone"]">
                     <div class="alert alert-dark" role="alert">
-                        <h4>  <span class="badge badge-pill badge-danger">
-                            
+                        <h4>
+                            <span class="badge badge-pill badge-danger">
+
                                 Account on hold
-                        </span></h4>
+                            </span>
+                        </h4>
                         @foreach (var client in ViewBag.OnHoldList)
                         {
                             <ul style="font-size:medium">
-                             
-                                    @client.ClientCompanyName
-                                <hr>  
-                                
+
+                                @client.ClientCompanyName
+                                <hr>
+
                             </ul>
                         }
                     </div>
                 </div>
+                <div class="col">
+
+                    <div class="alert alert-dark" role="alert">
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <label>Container Job this week </label>
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            VBS Ready
+                                        </th>
+                                        <th>
+                                            Completed
+                                        </th>
+                                    </tr>
+
+                                </thead>
+                                <tr>
+                                    <td>   To Yard </td>
+                                    <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToYardCurrentWeekVBS   </span>  </td>
+                                    <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.ToYardCurrentWeekVBSCompleted </span>  </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Cartage only</td>
+                                    <td> <span style="font-size:32px;" class="badge badge-primary">@ViewBag.CartageOnlyCurrentWeekVBS  </span></td>
+                                    <td>  <span style="font-size:32px;" class="badge badge-success"> @ViewBag.CartageOnlyCurrentWeekOFETACompleted </span>  </td>
+
+                                </tr>
+
+
+                            </table>
+                          
+                           
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col">
+
+                    <div class="alert alert-dark" role="alert">
+                        <table class="table">
+                            <thead>
+                                <label>Container Current Month</label>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <th>
+                                        Inbound
+                                    </th>
+                                    <th>
+                                        Cartage
+                                    </th>
+                                </tr>
+
+                            </thead>
+                            <tr>
+                                <td>   O/F ETA </td>
+                                <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToYardCurrentWeekOFETA   </span>  </td>
+                                <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.CartageOnlyCurrentWeekOFETA </span>  </td>
+                            </tr>
+                            <tr>
+                                <td>   Completed </td>
+                                <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToyardCurrentMonthOFETACompleted   </span>  </td>
+                                <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.CartageOnlyCurrentMonthOFETACompleted </span>  </td>
+                            </tr>
+
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="col">
+
+                    <div class="alert alert-dark" role="alert">
+                        <table class=" table">
+
+                            <thead>
+                                Unsolved issues
+                            </thead>
+                            <tr>
+                                <td> <span style="font-size:40px;" class="badge badge-danger">@ViewBag.countIssues</span>   </td>
+                            </tr>
+                        </table>
+                  
+                    </div>
+                </div>
+               
+
+
+
+
+
+
+
+
+
             </div>
-
-
-
-
 
 
             <div class="alert alert-dark" role="alert">
@@ -65,11 +164,11 @@
                                 }
                                 else
                                 {
-                            <h4 class="alert-heading" style="text-align:center"> Coming Jobs @@ @item.today</h4>
+                                    <h4 class="alert-heading" style="text-align:center"> Coming Jobs @@ @item.today</h4>
                                 }
 
                                 <ul>
-                                   
+
                                     <hr>
                                     <p style="font-size:medium">
                                         @item.MorningJob
@@ -91,7 +190,7 @@
 
                 }
 
-            </div >
+            </div>
 
 
 

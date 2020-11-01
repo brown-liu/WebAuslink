@@ -20,12 +20,15 @@ namespace WebAuslink
 {
     public class Startup
     {
-        public Startup(IConfiguration Config)
+        
+        public Startup(IConfiguration Config,IWebHostEnvironment env)
         {
             _configuration = Config;
+            _webHostEnvironment = env;
         }
 
         public IConfiguration _configuration { get; }
+        public IWebHostEnvironment _webHostEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

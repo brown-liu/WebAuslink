@@ -1,0 +1,36 @@
+﻿
+
+@section NavTop
+{
+    <h1 class="heading"> Auslink SOP and Operation Information   </h1>
+}
+
+
+<div class="container-fluid">
+
+    <div class="accordion" id="accordionExample">
+        @foreach (var item in ViewBag.SOPs)
+        {
+            var ID = "headingOne" + @item.Id;
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target=#@ID aria-expanded="false">
+                            @item.Title
+                        </button>
+                    </h2>
+                </div>
+                <div id=@ID class="collapse">
+                    <div class="card-body">
+                        <span class="btn btn-outline-primary" style="margin-bottom:10px;">   <a href="~/@item.pdfUrl" target="_blank">Open in a new page</a> </span>
+                        <embed style="height:800px" src="~/@item.pdfUrl" class="w-100" />
+
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

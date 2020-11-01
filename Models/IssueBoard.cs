@@ -9,11 +9,11 @@ namespace WebAuslink.Models
     public class IssueBoard
     {   [Key]
         public int id { get; set; }
-        [Display(Name ="Issue")]
+        [Display(Name ="Issue Title")]
         [Required(ErrorMessage ="Please state the name of issue")]
         public string IssueTitle { get; set; }
         [Required(ErrorMessage ="need to provide name of person who raised this issue")]
-        [Display(Name = "Reporter")]
+        [Display(Name = "Person who made this report")]
         public string WhoRaisedThisIssue { get; set; }
 
 
@@ -26,7 +26,11 @@ namespace WebAuslink.Models
 
         [Display(Name = "Time Solved")]
         public DateTime? IssueSolved { get; set; }
+
+        [Display(Name = "If this issue has been solved")]
         public bool IfIssueIsSolved { get; set; }
+
+        [Display(Name = "Person who and how this issue was solved")]
         public string WhoSolvedIssue { get; set; }
         
         

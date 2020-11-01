@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAuslink.Data;
 
 namespace WebAuslink.Migrations
 {
     [DbContext(typeof(WebAuslinkContext))]
-    partial class WebAuslinkContextModelSnapshot : ModelSnapshot
+    [Migration("20201101054853_a2")]
+    partial class a2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

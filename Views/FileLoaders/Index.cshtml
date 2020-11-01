@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebAuslink.Models.FileLoader>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+    <h1>Existing files on server</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Classification)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pdfUrl)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Classification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pdfUrl)
+                    </td>
+                    <td>
+        
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
