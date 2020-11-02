@@ -8,11 +8,15 @@
 
 
 
-    <h1>Report an issue</h1>
+    <h1>Showing unsolved issues only</h1>
 
+    <p style="margin-right:40px;">
+        <a class="btn btn-outline-primary" asp-action="Create">Report Issue Here</a>
+    </p >
     <p>
-        <a class="btn btn-outline-primary" asp-action="Create">Report Issue</a>
+        <a class="btn btn-outline-primary" asp-action="Index_full">Check Full list of Issues</a>
     </p>
+
     <table class="table">
         <thead>
             <tr>
@@ -26,12 +30,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.issueDescription)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IfIssueIsSolved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WhoSolvedIssue)
-                </th>
+           
+            
                 <th>
                     @Html.DisplayNameFor(model => model.IssueDateRaised)
                 </th>
@@ -41,33 +41,30 @@
         <tbody>
             @foreach (var item in Model)
             {
-            
-            <tr>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                </td><td>
-                    @Html.DisplayFor(modelItem => item.IssueTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WhoRaisedThisIssue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.issueDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IfIssueIsSolved)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WhoSolvedIssue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IssueDateRaised)
-                </td>
 
-            </tr>
-        }
-            </tbody>
-        </table>
+                <tr>
+
+                   <td>
+                       
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> 
+                   
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssueTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WhoRaisedThisIssue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.issueDescription)
+                    </td>
+              
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssueDateRaised)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

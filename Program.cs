@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using log4net;
 
 namespace WebAuslink
 {
@@ -17,10 +18,20 @@ namespace WebAuslink
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
                 {
+
                     webBuilder.UseStartup<Startup>();
+                }).ConfigureLogging((context, loggingBuilder) =>
+                {
+                    loggingBuilder.AddFilter("system", LogLevel.Warning);
+                    loggingBuilder.AddFilter("Microsoft",LogLevel.Warning);
+                    loggingBuilder.AddLog4Net();
+       
                 });
+
+
+
+            
     }
 }

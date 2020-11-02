@@ -7,39 +7,48 @@ using WebAuslink.Models;
 using WebAuslink.Repo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-
-
-
+using log4net.Core;
+using Microsoft.Extensions.Logging;
 
 namespace WebAuslink.Controllers
     
 {
-    [Authorize]
+    
     public class AccountController : Controller
 
     {
+        private readonly ILogger<AccountController> _logger;
         private readonly IAccountRepo _accountRepo;
-
-        public AccountController(IAccountRepo accountRepo)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountController(IAccountRepo accountRepo, ILogger<AccountController> log,RoleManager<IdentityRole> roleManager)
 
         {
-            _accountRepo = accountRepo;
+            _roleManager = roleManager;
+               _accountRepo = accountRepo;
+            _logger = log;
         }
 
-
+        //[Authorize(Roles = "Administrator")]
         [Route("signup")]
         public IActionResult SignUp()
         {
+            this._logger.LogInformation("signUP");
             return View();
         }
-
+        
         [Route("signup")]
         [HttpPost]
         public async Task<IActionResult> Signup(User user)
         {
             if (ModelState.IsValid)
             {
+                
                 var result = await _accountRepo.CreateUserAsync(user);
+
+                
+
+
+
                 if (!result.Succeeded)
                 {
                     foreach (var error in result.Errors)
@@ -48,7 +57,11 @@ namespace WebAuslink.Controllers
                     }
                     return View(user);
                 }
+
+              
+
                 ModelState.Clear();
+
             }
             return View();
         }
@@ -59,6 +72,8 @@ namespace WebAuslink.Controllers
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
+            _logger.LogInformation("Log Out");
+
             await _accountRepo.SignOutAsync();
             return RedirectToAction("Index","Home");
 

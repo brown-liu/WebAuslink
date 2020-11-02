@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using WebAuslink.Repo;
 using WebAuslink.Helper;
 using WebAuslink.Services;
-
+using Microsoft.Extensions.Logging;
 
 namespace WebAuslink
 {
@@ -25,10 +25,12 @@ namespace WebAuslink
         {
             _configuration = Config;
             _webHostEnvironment = env;
+           
         }
 
         public IConfiguration _configuration { get; }
         public IWebHostEnvironment _webHostEnvironment { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,10 +42,22 @@ namespace WebAuslink
                 c.LoginPath =_configuration["Application:LoginPath"];
             });
 
+            
             services.AddControllersWithViews();
             
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            
+            services.Configure<IdentityOptions>(option =>
+           {
+               option.Password.RequiredLength = 4;
+               option.Password.RequireDigit = false;
+               option.Password.RequiredUniqueChars = 0;
+               option.Password.RequireNonAlphanumeric = false;
+               option.Password.RequireUppercase = false;
+               option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+               option.Lockout.MaxFailedAccessAttempts = 5;
+
+           }
+            );
 
             services.AddScoped<IAccountRepo,AccountRepo>();
             services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, ApplicationUserClaimsPrincipalFactory>();

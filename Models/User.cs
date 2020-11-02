@@ -35,5 +35,7 @@ namespace WebAuslink.Models
         [Required(ErrorMessage = "Please confirm your password")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }    
+
+        public string Role { get; set; }
     }   
 }

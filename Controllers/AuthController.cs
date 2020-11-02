@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebAuslink.Models;
 using WebAuslink.Repo;
 
 namespace WebAuslink.Controllers
 {
+   
     public class AuthController : Controller
     {
         private readonly IAccountRepo _acc;
+      
 
         public AuthController(IAccountRepo acc)
         {
             _acc = acc;
+       
         }
 
 

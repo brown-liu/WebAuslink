@@ -54,7 +54,6 @@ namespace WebAuslink.Controllers
 
             List<SeaContainer> CartageOnlyCurrentWeekVBS = new List<SeaContainer>();
             
-                List<SeaContainer> ToYardCurrentWeekVBSCompleted = new List<SeaContainer>();
             List<SeaContainer> CartageOnlyCurrentWeekOFETA = new List<SeaContainer>();
 
             List<SeaContainer> ToYardCurrentWeekOFETA = new List<SeaContainer>();
@@ -66,11 +65,9 @@ namespace WebAuslink.Controllers
             List<SeaContainer> ToyardCurrentMonthOFETACompleted = new List<SeaContainer>();
 
 
-            List<SeaContainer> CartageOnlyCurrentWeekOFETACompleted = new List<SeaContainer>();
-
-            List<SeaContainer> ToYardCurrentWeekOFETACompleted = new List<SeaContainer>();
 
 
+            List<SeaContainer> CartageOnlyCurrentMonthOFETA = new List<SeaContainer>();
             foreach (SeaContainer container in containerList)
             {
                 //current week by VBS
@@ -81,54 +78,43 @@ namespace WebAuslink.Controllers
                 {
                         //cartage only + vbsconfirm + current week
                     CartageOnlyCurrentWeekVBS.Add(container);
-
-
                 }
                 else 
                 {
                         //To yard Inbound + vbsconfirm + current week
                         ToYardCurrentWeekVBS.Add(container);
-                        if (container.JobFullyCompleted)
-                        {
-                            ToYardCurrentWeekVBSCompleted.Add(container);
-
-                        }
-                }
-                
-                }
+                }            
+            }
                 //current week by oceanfreight
                 if ((GetWeekNumber(container.OceanFreightETA) == GetWeekNumber(DateTime.Now)))
                 {
 
                     if (container.IfCartageOnly == true)
-                    {
-                        //cartage only + ETA + current week
+                    {  //cartage only + ETA + current week
                         CartageOnlyCurrentWeekOFETA.Add(container);
-                        if (container.JobFullyCompleted)
-                        { //cartage only + ETA + current week + Completed
-                            CartageOnlyCurrentWeekOFETACompleted.Add(container);
-                        }
-                       
-
                     }
                     else
                     { //To yard Inbound + current week + ETA + Completed
                         ToYardCurrentWeekOFETA.Add(container);
-                        if(!container.JobFullyCompleted)
-                        {
-                            ToYardCurrentWeekOFETACompleted.Add(container);
-                        }
-
+                
                     }
 
                 }
+
+               
+
 
 
                 // current month by o.f eta
                 if (container.OceanFreightETA.Month == DateTime.Now.Month)
 
-                {
-                    ToYardCurrentMonthOFETA.Add(container);
+                {   if (container.IfCartageOnly)
+                    {
+                        CartageOnlyCurrentMonthOFETA.Add(container);
+                    }
+                    else { 
+                        ToYardCurrentMonthOFETA.Add(container);
+                    }
 
                     if (container.JobFullyCompleted )
                     {
@@ -151,13 +137,12 @@ namespace WebAuslink.Controllers
             }
 
 
-            int countIssues = issues.Count(m => m.IfIssueIsSolved == false);
+            ViewBag.countIssues = issues.Count(m => m.IfIssueIsSolved == false);
 
-            ViewBag.ToYardCurrentWeekVBSCompleted = ToYardCurrentWeekVBSCompleted.Count;
 
             ViewBag.ToYardCurrentWeekVBS = ToYardCurrentWeekVBS.Count;
 
-            ViewBag.CartageOnlyCurrentWeekVBS = ToYardCurrentWeekVBS.Count;
+            ViewBag.CartageOnlyCurrentWeekVBS = CartageOnlyCurrentWeekVBS.Count;//
 
 
             ViewBag.CartageOnlyCurrentWeekOFETA = CartageOnlyCurrentWeekOFETA.Count;
@@ -170,11 +155,11 @@ namespace WebAuslink.Controllers
             ViewBag.ToyardCurrentMonthOFETACompleted = ToyardCurrentMonthOFETACompleted.Count;
 
 
-            ViewBag.CartageOnlyCurrentWeekOFETACompleted = CartageOnlyCurrentWeekOFETACompleted.Count;
-
-            ViewBag.ToYardCurrentWeekOFETACompleted = ToYardCurrentWeekOFETACompleted.Count;
 
             ViewBag.ToYardCurrentMonthOFETA = ToYardCurrentMonthOFETA.Count();
+
+            ViewBag.CartageOnlyCurrentMonthOFETA = CartageOnlyCurrentMonthOFETA.Count();
+
 
             return View();
 

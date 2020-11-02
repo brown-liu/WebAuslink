@@ -21,9 +21,16 @@ namespace WebAuslink.Models
         }
 
         // GET: IssueBoards
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index_full()
         {
             return View(await _context.IssueBoard.ToListAsync());
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var issueList = await _context.IssueBoard.ToListAsync();
+            var UnsolvedIssueList = issueList.Where(m=>m.IfIssueIsSolved==false);
+            return View(UnsolvedIssueList);
         }
 
         // GET: IssueBoards/Details/5
