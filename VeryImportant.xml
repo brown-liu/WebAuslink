@@ -1,0 +1,45 @@
+﻿
+
+
+<html version="1.0" encoding="utf-8" />
+
+
+
+<a>
+
+  3/11/2020
+  spend 1 whole day trying to launch AOS on AWS with IIS
+
+  this is a record to make next launch easier.
+
+  1. use MS SQL STUDIO on AWS create new login.  - securables page. need to seach and add DB name to user. and test for normal operating
+
+  2. Connection string. Server=DESKTOP-3BJFCT2\\SQLEXPRESS;Database=WebAuslink;User Id=auslink;Password=Momo021907879;
+  
+  3. IIS in connections. right click website name, Edit Permission => remove read only (Not sure if relavent to issue)
+
+  4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</a>

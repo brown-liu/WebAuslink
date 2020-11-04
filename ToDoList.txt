@@ -1,8 +1,0 @@
-﻿  28/10
-  container class need to add To Mt wellington or East tamaki DONE!
-  Nav need to add "Container This week"  / "Container Not Done yet " HOLD
-  Homepage need to add "list of Client on hold // last updated"
-  home page need to add "History Container number per month table based on both ETA and D2Yard"
-  Nav need to add report Missing Cargo / Compliant from client
-  Nav change raise an issue to internal issue
-

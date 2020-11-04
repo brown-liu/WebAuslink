@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace WebAuslink.Controllers
     
 {
-    
+    [Authorize]
     public class AccountController : Controller
 
     {

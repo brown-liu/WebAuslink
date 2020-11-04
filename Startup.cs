@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using WebAuslink.Repo;
 using WebAuslink.Helper;
 using WebAuslink.Services;
-using Microsoft.Extensions.Logging;
 
 namespace WebAuslink
 {
@@ -58,7 +54,7 @@ namespace WebAuslink
 
            }
             );
-
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IAccountRepo,AccountRepo>();
             services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, ApplicationUserClaimsPrincipalFactory>();
             services.AddScoped<IUserservice, Userservice>();
@@ -68,11 +64,14 @@ namespace WebAuslink
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
+            
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -85,7 +84,7 @@ namespace WebAuslink
 
             app.UseRouting();
             app.UseAuthentication();
-
+            dbInitializer.Initialize();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
