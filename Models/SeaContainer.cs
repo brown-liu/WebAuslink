@@ -15,12 +15,16 @@ namespace WebAuslink.Models
             this.JobFullyCompleted = false;
         }
       
+        [Key]
+        public int Id { get; set; }
+        
         [Display(Name = "Yard")]
+
         public string DestinationSite { get; set; }
 
         public bool JobFullyCompleted { get; set; }
 
-        [Key]
+        
         [Display(Name ="Container No.")]
         [Remote (action:"Verify_Container_Number",controller:"SeaContainer")]
         public String ContainerNumber { get; set; }
@@ -47,13 +51,13 @@ namespace WebAuslink.Models
         public String HandlerName { get; set; }
         [Display(Name = "Cartage ONLY")]
         public bool IfCartageOnly { get; set; }
-        [Display(Name = "Deliver")]
+        [Display(Name = "Nd Deliver")]
         public bool IfRequireDelivery { get; set; }
-        [Display(Name = "Storage")]
+        [Display(Name = "Nd Storage")]
         public bool IfRequireStorage { get; set; }
         [Display(Name = "Cartage Booked")]
         public bool IfBookedCartage { get; set; }
-        [Display(Name = "REF")]
+        [Display(Name = "Require Inspection")]
         public bool Reference { get; set; }
         [Display(Name = "CC Record")]
         public bool IfEnteredCartonCloud { get; set; }
@@ -66,6 +70,9 @@ namespace WebAuslink.Models
 
         public string CCPONumber { get; set; }
 
+        [Display(Name = "Commodity")]
+        [StringLength(15)]
+        public string Commodity { get; set; }
       
     }
 }

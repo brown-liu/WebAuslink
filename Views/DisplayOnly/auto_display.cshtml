@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auslink</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.7/css/swiper.min.css">
+
+    <script src="https://unpkg.com/jquery-min@0.0.2/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.7/js/swiper.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/img/forklift.ico" />
+    <title>Auslink Ops Support</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="~/lib/jquery/jquery.js"></script>
+
+    <script type="text/javascript">
+        window.onload = setInterval(() => {
+            var d = new Date();
+            var mon = d.getMonth();
+            var date = d.getDate();
+            var day = d.getDay();
+            var hour = d.getHours();
+            var min = d.getMinutes();
+            var sec = d.getSeconds();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            const dayInWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday"];
+            document.getElementById("clock").innerHTML = dayInWeek[day] + " " + date + "  " + monthNames[mon] + " Time   " + hour + " : " + min + " : " + sec;
+            document.getElementById("currentMonth").innerHTML = monthNames[mon];
+
+
+        }, 1000);
+
+        function timedRefresh(timeoutPeriod) {
+            setTimeout("location.reload(true);", timeoutPeriod);
+        }
+
+       
+
+        window.onload = timedRefresh(60000);
+
+    </script>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+
+        <div class="navbar">
+            <h4 class="active"> <span class="badge badge-primary " id="clock"> </span>    </h4>
+
+
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <partial name="/Views/partial_view_pages/partial_general_broadcast.cshtml" />
+                </div>
+
+
+
+
+                <div class="swiper-slide">
+                    <partial name="/Views/partial_view_pages/partial_container_current_week.cshtml" />
+                </div>
+
+
+
+                <div class="swiper-slide">
+                    <partial name="/Views/partial_view_pages/container_month.cshtml" />
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: {
+            delay: 8000,
+        },
+    });
+</script>
+
+ 

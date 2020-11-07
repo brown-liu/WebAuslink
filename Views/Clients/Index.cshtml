@@ -3,6 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+@section NavTop{
+
+    <nav class="container">
+        <form class="form-inline" method="get" asp-action="Index">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search client" aria-label="Search" name="SearchStringClient">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button  style="margin-left:15px;" class="btn btn-outline-success my-3 my-sm-2" type="submit">Reset</button>
+        </form>
+    </nav>
+
+}
+
+
+
+
+
+
+
 <div class="container-fluid">
     <h1>Client Rate Cards</h1>
     <span class="badge badge-info">Showing limited information only. Click details to find more.  </span>
@@ -13,29 +32,29 @@
         <thead>
             <tr>
                 <th>
-                    
+
                 </th>
-               
+
                 <th>
                     @Html.DisplayNameFor(model => model.ClientCompanyName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CartageRate20)
                 </th>
-           
+
                 <th>
                     @Html.DisplayNameFor(model => model.CartageRate40)
                 </th>
-             
+
                 <th>
                     @Html.DisplayNameFor(model => model.CartageFAF)
                 </th>
-              
+
                 <th>
                     @Html.DisplayNameFor(model => model.CartageVBS)
                 </th>
-                
-                
+
+
                 <th>
                     @Html.DisplayNameFor(model => model.ChargePerCBM)
                 </th>
@@ -45,7 +64,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ChargePerFullTruckLoad)
                 </th>
-            
+
 
             </tr>
         </thead>
@@ -58,27 +77,27 @@
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
-                    
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ClientCompanyName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CartageRate20)
                     </td>
-           
+
                     <td>
                         @Html.DisplayFor(modelItem => item.CartageRate40)
                     </td>
-                  
+
                     <td>
                         @Html.DisplayFor(modelItem => item.CartageFAF)
                     </td>
-                   
+
                     <td>
                         @Html.DisplayFor(modelItem => item.CartageVBS)
                     </td>
-                    
-                    
+
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ChargePerCBM)
                     </td>
@@ -88,7 +107,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ChargePerFullTruckLoad)
                     </td>
-                  
+
 
                 </tr>
             }

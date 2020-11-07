@@ -7,15 +7,25 @@
     ViewData["Title"] = "Create";
 }
 
-
-@if (ViewBag.IsSuccess == true)
+@section NavTop
 {
+
+    @if (ViewBag.IsSuccess == true)
+    {
+<div class="container">
+
     <div class="alart alert-success alert-dismissible fade show" role="alert">
 
         <p>  <strong>Great! </strong> Container created successfully!  <p>
     </div>
 
+</div>
+       
+
+    }
+
 }
+
 
 
 
@@ -43,12 +53,12 @@
                 <span asp-validation-for="DestinationSite" class="text-danger"></span>
             </div>
 
-            
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-6 mb-3">
                 <label asp-for="ContainerNumber" class="control-label form-control-user"></label>
                 <input id="containerNumber" asp-for="ContainerNumber" class="form-control form-control-user" required />
-                <span id="display_container_number_check"  class="text-danger"></span>
+                <span id="display_container_number_check" class="text-danger"></span>
             </div>
             <script type="text/javascript">
 
@@ -74,7 +84,7 @@
 
                             else {
                                 $("#create_container_button").off("click", StopWork);
-                                
+
                             }
 
                         }
@@ -98,7 +108,7 @@
 
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label >Ocean Freight ETA as per BL</label>
+                <label>Ocean Freight ETA as per BL</label>
                 <input asp-for="OceanFreightETA" class="form-control" required />
                 <span asp-validation-for="OceanFreightETA" class="text-danger"></span>
             </div>
@@ -107,7 +117,7 @@
                 <input asp-for="TimeToYard" class="form-control" />
                 <span asp-validation-for="TimeToYard" class="text-danger"></span>
             </div>
-          
+
 
         </div>
 
@@ -118,6 +128,12 @@
                 <label class="control-label">Handler Name (Person Who passed this job to Warehouse)</label>
                 <input asp-for="HandlerName" class="form-control" required />
                 <span asp-validation-for="HandlerName" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="Commodity" class="control-label"></label>
+                <input asp-for="Commodity" class="form-control" />
+                <span asp-validation-for="Commodity" class="text-danger"></span>
+
             </div>
             <div class="col">
                 <div class="form-group form-check">

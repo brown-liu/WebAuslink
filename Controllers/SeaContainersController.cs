@@ -188,15 +188,12 @@ namespace WebAuslink.Controllers
 
 
         // GET: SeaContainers/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+       
 
             var seaContainer = await _context.SeaContainer
-                .FirstOrDefaultAsync(m => m.ContainerNumber == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (seaContainer == null)
             {
                 return NotFound();
@@ -255,7 +252,7 @@ namespace WebAuslink.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContainerNumber,DestinationSite,CCPONumber,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainerTemp)
+        public async Task<IActionResult> Create([Bind("Commodity,Id,ContainerNumber,DestinationSite,CCPONumber,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainerTemp)
         {
             //var ContainerList = await _context.SeaContainer.ToListAsync();
 
@@ -274,13 +271,26 @@ namespace WebAuslink.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(seaContainerTemp);
-               ViewBag.IsSuccess = true;
+               
                 
                  await _context.SaveChangesAsync();
+                List<string> nameList = new List<string>();
+                var ClientList = _context.Client.ToList();
+                if (ClientList != null)
+                {
+                    foreach (var client in ClientList)
+                    {
+                        nameList.Add(client.ClientCompanyName);
+                    }
 
-    
+                }
 
-                return RedirectToAction(nameof(Index));
+                ViewBag.ClientList = nameList;
+                ViewBag.YardList = new List<string> { "East Tamaki", "Mt Wellington", "Others (Cartage Job Only)" };
+
+                ViewBag.IsSuccess = true;
+                ModelState.Clear();
+                return View();
             }
             return View(seaContainerTemp);
         }
@@ -290,12 +300,9 @@ namespace WebAuslink.Controllers
 
 
 // GET: SeaContainers/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+       
 
             var seaContainer = await _context.SeaContainer.FindAsync(id);
             if (seaContainer == null)
@@ -304,12 +311,9 @@ namespace WebAuslink.Controllers
             }
             return View(seaContainer);
         }
-        public async Task<IActionResult> Edit_Yard_Inbounds(string id)
+        public async Task<IActionResult> Edit_Yard_Inbounds(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+           
 
             var seaContainer = await _context.SeaContainer.FindAsync(id);
             if (seaContainer == null)
@@ -319,12 +323,9 @@ namespace WebAuslink.Controllers
             return View(seaContainer);
         }
 
-        public async Task<IActionResult> Edit_Cartage_Only(string id)
+        public async Task<IActionResult> Edit_Cartage_Only(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
 
             var seaContainer = await _context.SeaContainer.FindAsync(id);
             if (seaContainer == null)
@@ -336,9 +337,9 @@ namespace WebAuslink.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Cartage_Only(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        public async Task<IActionResult> Edit_Cartage_Only(int id, [Bind("Commodity,Id,JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
         {
-            if (id != seaContainer.ContainerNumber)
+            if (id != seaContainer.Id)
             {
                 return NotFound();
             }
@@ -352,7 +353,7 @@ namespace WebAuslink.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SeaContainerExists(seaContainer.ContainerNumber))
+                    if (!SeaContainerExists(seaContainer.Id))
                     {
                         return NotFound();
                     }
@@ -376,9 +377,9 @@ namespace WebAuslink.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Yard_Inbounds(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        public async Task<IActionResult> Edit_Yard_Inbounds(int id, [Bind("Commodity,Id,JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
         {
-            if (id != seaContainer.ContainerNumber)
+            if (id != seaContainer.Id)
             {
                 return NotFound();
             }
@@ -392,7 +393,7 @@ namespace WebAuslink.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SeaContainerExists(seaContainer.ContainerNumber))
+                    if (!SeaContainerExists(seaContainer.Id))
                     {
                         return NotFound();
                     }
@@ -411,9 +412,9 @@ namespace WebAuslink.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
+        public async Task<IActionResult> Edit(int id, [Bind("Commodity,Id,JobFullyCompleted,ContainerNumber,CCPONumber,DestinationSite,OceanFreightETA,TimeToYard,ClientCompanyName,HandlerName,IfCartageOnly,IfRequireDelivery,IfRequireStorage,IfBookedCartage,Reference,IfEnteredCartonCloud,IfInvoiced,SpecialInstruction")] SeaContainer seaContainer)
         {
-            if (id != seaContainer.ContainerNumber)
+            if (id != seaContainer.Id)
             {
                 return NotFound();
             }
@@ -427,7 +428,7 @@ namespace WebAuslink.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SeaContainerExists(seaContainer.ContainerNumber))
+                    if (!SeaContainerExists(seaContainer.Id))
                     {
                         return NotFound();
                     }
@@ -442,15 +443,12 @@ namespace WebAuslink.Controllers
         }
 
         // GET: SeaContainers/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+           
 
             var seaContainer = await _context.SeaContainer
-                .FirstOrDefaultAsync(m => m.ContainerNumber == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (seaContainer == null)
             {
                 return NotFound();
@@ -462,7 +460,7 @@ namespace WebAuslink.Controllers
         // POST: SeaContainers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var seaContainer = await _context.SeaContainer.FindAsync(id);
             _context.SeaContainer.Remove(seaContainer);
@@ -470,9 +468,9 @@ namespace WebAuslink.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SeaContainerExists(string id)
+        private bool SeaContainerExists(int id)
         {
-            return _context.SeaContainer.Any(e => e.ContainerNumber == id);
+            return _context.SeaContainer.Any(e => e.Id == id);
         }
     }
 }

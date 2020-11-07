@@ -64,7 +64,7 @@
 
                             </th>
                             <th>
-                                Container NO.
+                                CTNR NO. / CAP
                             </th>
                             <th>
                                 PO No.
@@ -81,9 +81,7 @@
                                 Cartage Booked
                             </th>
 
-                            <th>
-                                Charged in CC
-                            </th>
+                         
                             <th>
                                 CC/XERO Invoiced
                             </th>
@@ -99,8 +97,8 @@
 
                             <tr>
                                 <td style="white-space:nowrap">
-                                    <a asp-action="Edit_Cartage_Only" asp-route-id="@item.ContainerNumber">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.ContainerNumber">Check</a>
+                                    <a asp-action="Edit_Cartage_Only" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Check</a>
 
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ClientCompanyName)
@@ -130,9 +128,7 @@
                                     @Html.DisplayFor(modelItem => item.IfBookedCartage)
                                 </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IfEnteredCartonCloud)
-                                </td>
+                              
                                 <td>
                                     @Html.DisplayFor(modelItem => item.IfInvoiced)
                                 </td>

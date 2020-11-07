@@ -1,0 +1,130 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<div class="container-fluid">
+    <table class="table table-striped" cellspacing="0">
+        <h3 style="text-align:center"> Inbound Container Shedule For <span id="currentMonth"></span> </h3>
+        <thead style="white-space:nowrap; font-size:0.8vw;">
+            <tr>
+
+                <th scope="col">
+                    #
+                </th>
+                <th scope="col">
+                    PO No.
+                </th>
+                <th scope="col">
+                    CONTAINER No. / CAP
+                </th>
+
+                <th>
+                    Commodity
+                </th>
+
+                <th scope="col">
+                    Client
+                </th>
+                <th scope="col">
+                    Destination Yard
+                </th>
+                <th scope="col">
+                    <a>O/F ETA</a>
+                </th>
+
+                <th scope="col">
+                    Handler
+                </th>
+
+
+
+
+
+                <th scope="col">
+                    Others
+                </th>
+            </tr>
+        </thead>
+
+        <tbody style="white-space:nowrap; font-size:0.8vw;">
+            @{
+                var count = 0;
+
+                @foreach (var item in ViewBag.ThisMonth)
+                {
+                    //string ToYard = "N/A";
+                    //if (@item.TimeToYard != null)
+                    //{
+                    //    ToYard = ((DateTime)item.TimeToYard).ToString("ddd dd MMMM");
+                    //}
+                    count += 1;
+
+            <tr>
+
+                <td scope="row">
+                    @count
+                </td>
+
+                <td>
+                    @item.CCPONumber
+                </td>
+                <td>
+                    @item.ContainerNumber
+                </td>
+
+                <td>
+                    @item.Commodity
+                </td>
+                <td>
+                    @item.ClientCompanyName
+                </td>
+                <td>
+                    @item.DestinationSite
+                </td>
+                <td>
+                    @item.OceanFreightETA.ToString("ddd dd MMMM")
+                </td>
+                <td>
+                    @item.HandlerName
+                </td>
+
+
+
+
+
+                <td>
+                    @{
+                        if (@item.IfRequireDelivery)
+                        {
+                            <span style="font-size:0.9vw" class="badge   badge-success">Deliver</span>
+                        }
+                        if (@item.IfRequireStorage)
+                        {
+                            <span style="        font-size: 0.9vw
+" class="badge  badge-success">Storage</span>
+                        }
+                        if (item.Reference)
+                        {
+                            <span style="        font-size: 0.9vw
+" class="badge badge-danger">Inspection</span>
+                        }
+
+                    }
+
+
+
+                </td>
+
+
+            </tr>
+                }}
+
+        </tbody>
+
+    </table>
+</div>
+
+
+

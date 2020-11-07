@@ -4,6 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
+@section NavTop{
+
+    <nav class="container">
+        <form class="form-inline" method="get" asp-action="IndexReadOnly">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search client" aria-label="Search" name="SearchStringClient">
+            <button class="btn btn-outline-success my-2 my-sm-2" type="submit" style="margin-right:10px;">Search</button>
+            <button class="btn btn-outline-success my-3 my-sm-2" type="submit">Reset</button>
+        </form>
+    </nav>
+
+}
 
 
 <div class="container-fluid">

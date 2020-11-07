@@ -12,7 +12,14 @@
         <div class="col-md-4">
             <form asp-action="Edit_Cartage_Only">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="ContainerNumber" />
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="ContainerNumber" class="control-label"></label>
+                    <input asp-for="ContainerNumber" class="form-control" />
+                    <span asp-validation-for="ContainerNumber" class="text-danger"></span>
+                </div>
+
+
                 <div class="form-group">
                     <label asp-for="OceanFreightETA" class="control-label"></label>
                     <input asp-for="OceanFreightETA" class="form-control" value="@Model.OceanFreightETA.ToString("yyyy-MM-dd")" />

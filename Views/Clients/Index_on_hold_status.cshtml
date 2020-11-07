@@ -4,53 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
-
-    
 
 
-        <table class="table">
-            <h2 style="text-align:center">  Client Account Status  </h2>
-            <thead>
+@section NavTop{
+
+    <nav class="container">
+        <form class="form-inline" method="get" asp-action="Index_on_hold_status">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search client" aria-label="Search" name="SearchStringClient">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button style="margin-left:15px;" class="btn btn-outline-success my-3 my-sm-2" type="submit">Reset</button>
+        </form>
+    </nav>
+
+}
+
+
+
+<div class="container-fluid">
+
+
+
+
+    <table class="table">
+        <h2 style="text-align:center">  Client Account Status  </h2>
+        <thead>
+            <tr>
+
+                <th>
+                    Client Name
+
+                </th>
+                <th></th>
+                <th>
+                    If account on hold
+                </th>
+
+                <th>
+                    Last updated
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientCompanyName)
+                    </td>
+                    <td>
+                        <button class=" btn btn-outline-primary">     <a asp-route-id="@item.Id" asp-action="EditOnHoldStatus">Change Status</a> </button>
 
-                    <th>
-                        Client Name
+                    </td>
 
-                    </th>
-                    <th></th>
-                    <th>
-                       If account on hold
-                    </th>
-
-                    <th>
-                        Last updated
-                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IfAccountIsOnHold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdate)
+                    </td>
 
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ClientCompanyName)
-                        </td>
-                        <td>
-                            <button class=" btn btn-outline-primary">     <a asp-route-id="@item.Id" asp-action="EditOnHoldStatus">Change Status</a> </button>
+            }
 
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IfAccountIsOnHold)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastUpdate)
-                        </td>
-
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>

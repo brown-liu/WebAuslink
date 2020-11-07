@@ -5,31 +5,35 @@
 
 }
 
+<style type="text/css">
+
+</style>
 
 
 
 
-<body >
-    <div class="container-fluid" >
+
+<body>
+    <div class="container-fluid">
         <section class="jumbotron text-center">
 
-            <h1 class="heading">Welcome</h1>
+            <h1 class="heading" style="font-size: 2.2vw;" >Welcome</h1>
             <p class="lead text-muted">Auslink Operating Support </p>
             <hr />
 
 
             <div class="row">
-                <div class="col" style="display: @ViewData["IfNone"]">
+                <div class="col" style="display: @ViewData["IfNone"] ">
                     <div class="alert alert-dark" role="alert">
-                        <h4>
-                            <span class="badge badge-pill badge-danger">
+                       
+                            <span class="badge badge-pill badge-danger"  style=" font-size: 0.8vw;">
 
                                 Account on hold
                             </span>
-                        </h4>
+                        
                         @foreach (var client in ViewBag.OnHoldList)
                         {
-                            <ul style="font-size:medium">
+                            <ul  style=" font-size: 0.8vw;">
 
                                 @client.ClientCompanyName
                                 <hr>
@@ -42,10 +46,10 @@
 
                     <div class="alert alert-dark" role="alert">
                         <div>
-                            <table class="table">
+                            <table class="table"  style=" font-size: 0.8vw;" >
                                 <thead>
-                                    <label>Container Job this week </label>
-                                    <tr>
+                                    <label  style=" font-size: 0.8vw;">Container Job this week </label>
+                                    <tr >
                                         <th>
 
                                         </th>
@@ -60,21 +64,21 @@
                                 </thead>
                                 <tr>
                                     <td>   To Yard </td>
-                                    <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToYardCurrentWeekVBS   </span>  </td>
-                                    <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.ToYardCurrentWeekOFETA </span>  </td>
+                                    <td>  <span style="        font-size: 2.2vw;"  class="badge badge-primary">@ViewBag.ToYardCurrentWeekVBS   </span>  </td>
+                                    <td>  <span style="        font-size: 2.2vw;"  class="badge badge-success">@ViewBag.ToYardCurrentWeekOFETA </span>  </td>
                                 </tr>
 
                                 <tr>
                                     <td>Cartage only</td>
-                                    <td> <span style="font-size:32px;" class="badge badge-primary">@ViewBag.CartageOnlyCurrentWeekVBS  </span></td>
-                                    <td>  <span style="font-size:32px;" class="badge badge-success"> @ViewBag.CartageOnlyCurrentWeekOFETA </span>  </td>
+                                    <td> <span style="        font-size: 2.2vw;" class="badge badge-primary">@ViewBag.CartageOnlyCurrentWeekVBS  </span></td>
+                                    <td>  <span style="        font-size: 2.2vw;"  class="badge badge-success"> @ViewBag.CartageOnlyCurrentWeekOFETA </span>  </td>
 
                                 </tr>
 
 
                             </table>
-                          
-                           
+
+
                         </div>
 
                     </div>
@@ -82,9 +86,9 @@
                 <div class="col">
 
                     <div class="alert alert-dark" role="alert">
-                        <table class="table">
+                        <table class="table"   style=" font-size: 0.8vw;">
                             <thead>
-                                <label>Container Current Month</label>
+                                <label  style=" font-size: 0.8vw;">Container Current Month</label>
                                 <tr>
                                     <th>
 
@@ -100,13 +104,13 @@
                             </thead>
                             <tr>
                                 <td>   O/F ETA </td>
-                                <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToYardCurrentMonthOFETA   </span>  </td>
-                                <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.CartageOnlyCurrentMonthOFETA </span>  </td>
+                                <td>  <span style="font-size:2.2vw;" class="badge badge-primary">@ViewBag.ToYardCurrentMonthOFETA   </span>  </td>
+                                <td>  <span style="        font-size: 2.2vw;" class="badge badge-success">@ViewBag.CartageOnlyCurrentMonthOFETA </span>  </td>
                             </tr>
                             <tr>
                                 <td>   Completed </td>
-                                <td>  <span style="font-size:32px;" class="badge badge-primary">@ViewBag.ToyardCurrentMonthOFETACompleted   </span>  </td>
-                                <td>  <span style="font-size:32px;" class="badge badge-success">@ViewBag.CartageOnlyCurrentMonthOFETACompleted </span>  </td>
+                                <td>  <span style="        font-size: 2.2vw;" class="badge badge-primary">@ViewBag.ToyardCurrentMonthOFETACompleted   </span>  </td>
+                                <td>  <span style="        font-size: 2.2vw;" class="badge badge-success">@ViewBag.CartageOnlyCurrentMonthOFETACompleted </span>  </td>
                             </tr>
 
 
@@ -117,19 +121,19 @@
                 <div class="col">
 
                     <div class="alert alert-dark" role="alert">
-                        <table class=" table">
+                        <table class=" table"  style=" font-size: 0.8vw;">
 
-                            <thead>
+                            <label  style=" font-size: 0.8vw;">
                                 Unsolved issues
-                            </thead>
+                            </label>
                             <tr>
-                                <td> <span style="font-size:40px;" class="badge badge-danger">@ViewBag.countIssues</span>   </td>
+                                <td> <span style="        font-size: 2.2vw;"  class="badge badge-danger">@ViewBag.countIssues</span>   </td>
                             </tr>
                         </table>
-                  
+
                     </div>
                 </div>
-               
+
 
 
 
@@ -143,20 +147,20 @@
 
 
             <div class="alert alert-dark" role="alert">
-                <div style="text-align:left">
-                    <button class="btn btn-outline-primary " type="submit">
-                        <a asp-controller="DailyToDoLists" asp-action="Index">
+                <div style="text-align:left;margin-bottom:10px;" >
 
-                            Go to all plans
-                        </a>
-                    </button>
+                    <a class="btn btn-outline-primary " asp-controller="DailyToDoLists" asp-action="Index">
+
+                        Go to all plans
+                    </a>
+
                 </div>
                 @foreach (var item in ViewBag.TodayList)
 
                 {
 
-                    <div class="row">
-                        <div class=" col">
+                    <div class="container-fluid"  >
+                        
                             <div class="alert alert-secondary" role="alert">
                                 @if (item.today.Date == DateTime.Now.Date)
                                 {
@@ -167,25 +171,29 @@
                                     <h4 class="alert-heading" style="text-align:center"> Coming Jobs @@ @item.today</h4>
                                 }
 
-                                <ul>
+                            <div style="font-size: 1vw;">
 
-                                    <hr>
-                                    <p style="font-size:medium">
-                                        @item.MorningJob
-                                    </p>
-                                    <hr>
-                                    <p style="font-size:medium">
-                                        @item.AfternoonJob
-                                    </p>
-                                    <hr>
-                                    <p style="font-size:medium">
-                                        @item.ExtraWork
-                                    </p>
+                                <hr>
+                            
+                                <div style=" white-space:pre-line; text-align:left">
+                                    <strong>  Morning Jobs  </strong>
+                                    @item.MorningJob
+                                </div>
+                                <hr>
+                                <p style=" white-space:pre-line; text-align:left">
+                                    <strong>  Afternoon Jobs  </strong>
+                                    @item.AfternoonJob
+                                </p>
+                                <hr>
+                                <p style=" white-space:pre-line; text-align:left">
+                                    <strong>  Extra / Special Jobs  </strong> 
+                                  @item.ExtraWork
+                                </p>
 
 
-                                </ul>
                             </div>
-                        </div>
+                            </div>
+                    
                     </div>
 
                 }
@@ -196,11 +204,11 @@
 
 
         </section>
- 
-</div>
-   
-    
-    
+
+    </div>
+
+
+
 
 
 

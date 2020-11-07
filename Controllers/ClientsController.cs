@@ -24,14 +24,34 @@ namespace WebAuslink.Controllers
         }
 
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchStringClient)
         {
-            return View(await _context.Client.ToListAsync());
+            var all_client = await _context.Client.ToListAsync();
+
+            if (!string.IsNullOrEmpty(SearchStringClient))
+            {
+                var result = all_client.Where(m => m.ClientCompanyName.ToLower().Contains(SearchStringClient.ToLower()));
+               
+       
+                    return View(result);   
+            
+            }
+            return View(all_client);
         }
 
-        public async Task<IActionResult> IndexReadOnly()
+        public async Task<IActionResult> IndexReadOnly(string SearchStringClient)
         {
-            return View(await _context.Client.ToListAsync());
+            var all_client = await _context.Client.ToListAsync();
+
+            if (!string.IsNullOrEmpty(SearchStringClient))
+            {
+                var result = all_client.Where(m => m.ClientCompanyName.ToLower().Contains(SearchStringClient.ToLower()));
+
+
+                return View(result);
+
+            }
+            return View(all_client);
         }
 
 
@@ -187,9 +207,21 @@ namespace WebAuslink.Controllers
             return _context.Client.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> Index_on_hold_status()
+
+
+
+        public async Task<IActionResult> Index_on_hold_status(string SearchStringClient)
         {
-            return View(await _context.Client.ToListAsync());
+            var all_client = await _context.Client.ToListAsync();
+
+            if (!string.IsNullOrEmpty(SearchStringClient))
+            {
+                var result = all_client.Where(m => m.ClientCompanyName.ToLower().Contains(SearchStringClient.ToLower()));
+                return View(result);
+            }
+
+
+            return View(all_client);
 
         }
 
